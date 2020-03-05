@@ -33,6 +33,30 @@
 
 [计算机网络](https://juejin.im/post/5d896cccf265da03bd055c87)
 
+##### 组件化探索
+
+- 冰霜 · [iOS 组件化 —— 路由设计思路分析](https://halfrost.com/ios_router/)
+
+- Limboy · [蘑菇街 App 的组件化之路](https://limboy.me/tech/2016/03/10/mgj-components.html)
+
+- Limboy · [蘑菇街 App 的组件化之路·续](https://limboy.me/tech/2016/03/14/mgj-components-continued.html)
+
+- Casa · [iOS 应用架构谈 组件化方案](https://casatwy.com/iOS-Modulization.html)
+
+- bang · [iOS 组件化方案探索](http://blog.cnbang.net/tech/3080/)
+
+- MrPeak · [iOS 组件化方案](https://mp.weixin.qq.com/s/zvT7YbP-ex8TeeCYuEis5Q)
+
+- 京东 · [京东 iOS 客户端组件管理实践](https://www.infoq.cn/article/jd-ios-component-management)
+
+- 美团技术团队 · [Category 特性在 iOS 组件化中的应用与管控](https://mp.weixin.qq.com/s/5ucpVa6ku4b9_pfMP9CqlQ)
+
+- [iOS 从零到一搭建组件化项目框架](https://juejin.im/post/5ba3cc0df265da0aac6fdaa0)
+
+- [iOS 组件化：Casa 和 小王 的对话](https://mp.weixin.qq.com/s/ir-agdSwM78R2ROxWVdPgQ)
+
+  
+
 #####其他技能点
 
 [基于runloop的线程保活、销毁与通信](https://www.jianshu.com/p/4d5b6fc33519)

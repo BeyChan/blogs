@@ -1,0 +1,1033 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>23-如何构造酷炫的物理效果和过场动画效果？</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style>
+        html {
+            color: #333;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-rendering: optimizelegibility;
+            font-family: Helvetica Neue, PingFang SC, Verdana, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif
+        }
+
+        html.borderbox *,
+        html.borderbox :after,
+        html.borderbox :before {
+            box-sizing: border-box
+        }
+
+        article,
+        aside,
+        blockquote,
+        body,
+        button,
+        code,
+        dd,
+        details,
+        dl,
+        dt,
+        fieldset,
+        figcaption,
+        figure,
+        footer,
+        form,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        header,
+        hr,
+        input,
+        legend,
+        li,
+        menu,
+        nav,
+        ol,
+        p,
+        pre,
+        section,
+        td,
+        textarea,
+        th,
+        ul {
+            margin: 0;
+            padding: 0
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        menu,
+        nav,
+        section {
+            display: block
+        }
+
+        audio,
+        canvas,
+        video {
+            display: inline-block
+        }
+
+        body,
+        button,
+        input,
+        select,
+        textarea {
+            font: 300 1em/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, Helvetica, sans-serif
+        }
+
+        button::-moz-focus-inner,
+        input::-moz-focus-inner {
+            padding: 0;
+            border: 0
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        fieldset,
+        img {
+            border: 0
+        }
+
+        blockquote {
+            position: relative;
+            color: #999;
+            font-weight: 400;
+            border-left: 1px solid #1abc9c;
+            padding-left: 1em;
+            margin: 1em 3em 1em 2em
+        }
+
+        @media only screen and (max-width: 640px) {
+            blockquote {
+                margin: 1em 0
+            }
+        }
+
+        abbr,
+        acronym {
+            border-bottom: 1px dotted;
+            font-variant: normal
+        }
+
+        abbr {
+            cursor: help
+        }
+
+        del {
+            text-decoration: line-through
+        }
+
+        address,
+        caption,
+        cite,
+        code,
+        dfn,
+        em,
+        th,
+        var {
+            font-style: normal;
+            font-weight: 400
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        caption,
+        th {
+            text-align: left
+        }
+
+        q:after,
+        q:before {
+            content: ""
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative
+        }
+
+        :root sub,
+        :root sup {
+            vertical-align: baseline
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        a {
+            color: #1abc9c
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .typo a {
+            border-bottom: 1px solid #1abc9c
+        }
+
+        .typo a:hover {
+            border-bottom-color: #555;
+            color: #555
+        }
+
+        .typo a:hover,
+        a,
+        ins {
+            text-decoration: none
+        }
+
+        .typo-u,
+        u {
+            text-decoration: underline
+        }
+
+        mark {
+            background: #fffdd1;
+            border-bottom: 1px solid #ffedce;
+            padding: 2px;
+            margin: 0 5px
+        }
+
+        code,
+        pre,
+        pre tt {
+            font-family: Courier, Courier New, monospace
+        }
+
+        pre {
+            background: hsla(0, 0%, 97%, .7);
+            border: 1px solid #ddd;
+            padding: 1em 1.5em;
+            display: block;
+            -webkit-overflow-scrolling: touch
+        }
+
+        hr {
+            border: none;
+            border-bottom: 1px solid #cfcfcf;
+            margin-bottom: .8em;
+            height: 10px
+        }
+
+        .typo-small,
+        figcaption,
+        small {
+            font-size: .9em;
+            color: #888
+        }
+
+        b,
+        strong {
+            font-weight: 700;
+            color: #000
+        }
+
+        [draggable] {
+            cursor: move
+        }
+
+        .clearfix:after,
+        .clearfix:before {
+            content: "";
+            display: table
+        }
+
+        .clearfix:after {
+            clear: both
+        }
+
+        .clearfix {
+            zoom: 1
+        }
+
+        .textwrap,
+        .textwrap td,
+        .textwrap th {
+            word-wrap: break-word;
+            word-break: break-all
+        }
+
+        .textwrap-table {
+            table-layout: fixed
+        }
+
+        .serif {
+            font-family: Palatino, Optima, Georgia, serif
+        }
+
+        .typo-dl,
+        .typo-form,
+        .typo-hr,
+        .typo-ol,
+        .typo-p,
+        .typo-pre,
+        .typo-table,
+        .typo-ul,
+        .typo dl,
+        .typo form,
+        .typo hr,
+        .typo ol,
+        .typo p,
+        .typo pre,
+        .typo table,
+        .typo ul,
+        blockquote {
+            margin-bottom: 1rem
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: PingFang SC, Helvetica Neue, Verdana, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+            color: #000;
+            line-height: 1.35
+        }
+
+        .typo-h1,
+        .typo-h2,
+        .typo-h3,
+        .typo-h4,
+        .typo-h5,
+        .typo-h6,
+        .typo h1,
+        .typo h2,
+        .typo h3,
+        .typo h4,
+        .typo h5,
+        .typo h6 {
+            margin-top: 1.2em;
+            margin-bottom: .6em;
+            line-height: 1.35
+        }
+
+        .typo-h1,
+        .typo h1 {
+            font-size: 2em
+        }
+
+        .typo-h2,
+        .typo h2 {
+            font-size: 1.8em
+        }
+
+        .typo-h3,
+        .typo h3 {
+            font-size: 1.6em
+        }
+
+        .typo-h4,
+        .typo h4 {
+            font-size: 1.4em
+        }
+
+        .typo-h5,
+        .typo-h6,
+        .typo h5,
+        .typo h6 {
+            font-size: 1.2em
+        }
+
+        .typo-ul,
+        .typo ul {
+            margin-left: 1.3em;
+            list-style: disc
+        }
+
+        .typo-ol,
+        .typo ol {
+            list-style: decimal;
+            margin-left: 1.9em
+        }
+
+        .typo-ol ol,
+        .typo-ol ul,
+        .typo-ul ol,
+        .typo-ul ul,
+        .typo li ol,
+        .typo li ul {
+            margin-bottom: .8em;
+            margin-left: 2em
+        }
+
+        .typo-ol ul,
+        .typo-ul ul,
+        .typo li ul {
+            list-style: circle
+        }
+
+        .typo-table td,
+        .typo-table th,
+        .typo table caption,
+        .typo table td,
+        .typo table th {
+            border: 1px solid #ddd;
+            padding: .5em 1em;
+            color: #666
+        }
+
+        .typo-table th,
+        .typo table th {
+            background: #fbfbfb
+        }
+
+        .typo-table thead th,
+        .typo table thead th {
+            background: hsla(0, 0%, 95%, .7)
+        }
+
+        .typo table caption {
+            border-bottom: none
+        }
+
+        .typo-input,
+        .typo-textarea {
+            -webkit-appearance: none;
+            border-radius: 0
+        }
+
+        .typo-em,
+        .typo em,
+        caption,
+        legend {
+            color: #000;
+            font-weight: inherit
+        }
+
+        .typo-em {
+            position: relative
+        }
+
+        .typo-em:after {
+            position: absolute;
+            top: .65em;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            content: "\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB\30FB"
+        }
+
+        .typo img {
+            max-width: 100%
+        }
+
+        .common-content {
+            font-weight: 400;
+            color: #353535;
+            line-height: 1.75rem;
+            white-space: normal;
+            word-break: normal;
+            font-size: 1rem
+        }
+
+        .common-content img {
+            display: block;
+            max-width: 100%;
+            background-color: #eee
+        }
+
+        .common-content audio,
+        .common-content video {
+            width: 100%;
+            background-color: #eee
+        }
+
+        .common-content center,
+        .common-content font {
+            margin-top: 1rem;
+            display: inline-block
+        }
+
+        .common-content center {
+            width: 100%
+        }
+
+        .common-content pre {
+            margin-top: 1rem;
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+            overflow: hidden
+        }
+
+        .common-content pre code {
+            font-size: .8rem;
+            font-family: Consolas, Liberation Mono, Menlo, monospace, Courier;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            overflow-x: auto
+        }
+
+        .common-content hr {
+            border: none;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid #f5f5f5;
+            height: 1px;
+            background: none
+        }
+
+        .common-content b,
+        .common-content h1,
+        .common-content h2,
+        .common-content h3,
+        .common-content h4,
+        .common-content h5,
+        .common-content strong {
+            font-weight: 700
+        }
+
+        .common-content h1,
+        .common-content h2 {
+            font-size: 1.125rem;
+            margin-bottom: .45rem
+        }
+
+        .common-content h3,
+        .common-content h4,
+        .common-content h5 {
+            font-size: 1rem;
+            margin-bottom: .45rem
+        }
+
+        .common-content p {
+            font-weight: 400;
+            color: #353535;
+            margin-top: .15rem
+        }
+
+        .common-content .orange {
+            color: #ff5a05
+        }
+
+        .common-content .reference {
+            font-size: 1rem;
+            color: #888
+        }
+
+        .custom-rich-content h1 {
+            margin-top: 0;
+            font-weight: 400;
+            font-size: 15.25px;
+            border-bottom: 1px solid #eee;
+            line-height: 2.8
+        }
+
+        .custom-rich-content li,
+        .custom-rich-content p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6
+        }
+
+        table.hljs-ln {
+            margin-bottom: 0;
+            border-spacing: 0;
+            border-collapse: collapse
+        }
+
+        table.hljs-ln,
+        table.hljs-ln tbody,
+        table.hljs-ln td,
+        table.hljs-ln tr {
+            box-sizing: border-box
+        }
+
+        table.hljs-ln td {
+            padding: 0;
+            border: 0
+        }
+
+        table.hljs-ln td.hljs-ln-numbers {
+            min-width: 15px;
+            color: rgba(27, 31, 35, .3);
+            text-align: right;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none
+        }
+
+        table.hljs-ln td.hljs-ln-code,
+        table.hljs-ln td.hljs-ln-numbers {
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+            font-size: 12px;
+            line-height: 20px;
+            vertical-align: top
+        }
+
+        table.hljs-ln td.hljs-ln-code {
+            position: relative;
+            padding-right: 10px;
+            padding-left: 10px;
+            overflow: visible;
+            color: #24292e;
+            word-wrap: normal;
+            white-space: pre
+        }
+
+        video::-webkit-media-controls {
+            overflow: hidden !important
+        }
+
+        video::-webkit-media-controls-enclosure {
+            width: calc(100% + 32px);
+            margin-left: auto
+        }
+
+        ._29HP61GA_0 {
+            max-width:800px;
+            margin:0 auto;
+            margin-bottom: 20px;
+            font-weight: 400;
+            color: #353535;
+            line-height: 1.76;
+            white-space: normal;
+            word-break: normal;
+            font-size: 17px;
+            -webkit-transition: background-color .3s ease;
+            transition: background-color .3s ease
+        }
+
+        ._29HP61GA_0 .MathJax_Display {
+            overflow: auto
+        }
+
+        ._29HP61GA_0 .poster {
+            position: fixed;
+            left: -10000px;
+            top: -10000px;
+            overflow: hidden;
+            padding: 1rem;
+            background: #ececec
+        }
+
+        ._29HP61GA_0 .richcontent-pre-copy {
+            font-size: 13px;
+            color: #888;
+            position: absolute;
+            right: 1em;
+            top: .5em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        ._29HP61GA_0 .richcontent-pre-copy .iconfont {
+            font-size: 12px;
+            margin-right: .2em
+        }
+
+        ._29HP61GA_0 a {
+            color: #fa8919;
+            border-bottom: 1px solid #fa8919
+        }
+
+        ._29HP61GA_0 img {
+            display: block;
+            max-width: 100%;
+            position: relative;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            background-color: #eee;
+            vertical-align: top;
+            border-radius: 0
+        }
+
+        ._29HP61GA_0 audio,
+        ._29HP61GA_0 video {
+            width: 100%;
+            background-color: #eee
+        }
+
+        ._29HP61GA_0 pre {
+            margin-top: 16px;
+            padding: 34px 0 0;
+            margin-bottom: 30px;
+            position: relative;
+            border-radius: 6px;
+            background: rgba(246, 247, 251, .749);
+            border: 0
+        }
+
+        ._29HP61GA_0 pre code {
+            font-size: 12px;
+            font-family: Consolas, Liberation Mono, Menlo, monospace, Courier;
+            display: block;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            margin-left: 16px;
+            margin-right: 16px;
+            overflow-x: scroll
+        }
+
+        ._29HP61GA_0 pre code:after {
+            content: "";
+            height: 30px;
+            width: 100%;
+            display: block
+        }
+
+        ._29HP61GA_0 hr {
+            border: none;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid #f5f5f5;
+            height: 1px;
+            background: none
+        }
+
+        ._29HP61GA_0 h1,
+        ._29HP61GA_0 h2,
+        ._29HP61GA_0 h3,
+        ._29HP61GA_0 h4,
+        ._29HP61GA_0 h5 {
+            margin-bottom: 20px;
+            margin-top: 0;
+            font-weight: 700
+        }
+
+        ._29HP61GA_0 b,
+        ._29HP61GA_0 strong {
+            font-weight: 700
+        }
+
+        ._29HP61GA_0 h1 {
+            font-size: 21px
+        }
+
+        ._29HP61GA_0 h2 {
+            font-size: 20px
+        }
+
+        ._29HP61GA_0 h3 {
+            font-size: 19px
+        }
+
+        ._29HP61GA_0 h4 {
+            font-size: 18px
+        }
+
+        ._29HP61GA_0 h5 {
+            font-size: 17px
+        }
+
+        ._29HP61GA_0 center,
+        ._29HP61GA_0 p {
+            font-weight: 400;
+            color: #353535;
+            margin-top: 0;
+            margin-bottom: 30px;
+            word-break: break-word
+        }
+
+        ._29HP61GA_0 center {
+            text-align: center
+        }
+
+        ._29HP61GA_0 blockquote {
+            margin-top: 0;
+            margin-bottom: 34px;
+            border-left: 3px solid #e8e8e8;
+            padding-left: 17px;
+            color: #353535
+        }
+
+        ._29HP61GA_0 blockquote p {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        ._29HP61GA_0 ol,
+        ._29HP61GA_0 ul {
+            margin-bottom: 30px
+        }
+
+        ._29HP61GA_0 ol p,
+        ._29HP61GA_0 ul p {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        ._29HP61GA_0 ol {
+            list-style: decimal;
+            margin-left: 20px
+        }
+
+        ._29HP61GA_0 ul li {
+            padding-left: 17px;
+            position: relative;
+            margin-bottom: 10px
+        }
+
+        ._29HP61GA_0 ul li:after {
+            content: "";
+            height: 6px;
+            width: 6px;
+            border-radius: 50%;
+            background: #353535;
+            position: absolute;
+            top: 10px;
+            left: 0
+        }
+
+        ._29HP61GA_0 .orange {
+            color: #fa8919
+        }
+
+        ._29HP61GA_0 .reference {
+            color: #888
+        }
+
+        ._29HP61GA_0 .m-right {
+            text-align: right
+        }
+
+        ._29HP61GA_0 .m-center {
+            text-align: center;
+            display: block
+        }
+
+        ._29HP61GA_0 .m-gray {
+            color: #888
+        }
+
+        ._29HP61GA_0 .m-small {
+            font-size: 15px
+        }
+
+        ._29HP61GA_0 table.hljs-ln {
+            margin-bottom: 0;
+            border-spacing: 0;
+            border-collapse: collapse
+        }
+
+        ._29HP61GA_0 table.hljs-ln,
+        ._29HP61GA_0 table.hljs-ln tbody,
+        ._29HP61GA_0 table.hljs-ln td,
+        ._29HP61GA_0 table.hljs-ln tr {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        ._29HP61GA_0 table.hljs-ln td {
+            padding: 0;
+            border: 0
+        }
+
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-numbers {
+            min-width: 15px;
+            font-size: 12px;
+            color: rgba(27, 31, 35, .3);
+            text-align: right;
+            white-space: nowrap;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-code,
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-numbers {
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+            line-height: 20px;
+            vertical-align: top
+        }
+
+        ._29HP61GA_0 table.hljs-ln td.hljs-ln-code {
+            position: relative;
+            padding-right: 10px;
+            padding-left: 10px;
+            overflow: visible;
+            font-size: 13px;
+            color: #666;
+            word-wrap: normal;
+            white-space: pre
+        }
+
+    </style>
+</head>
+<body>
+<div class="_29HP61GA_0">
+<h1>23-如何构造酷炫的物理效果和过场动画效果？</h1>
+<p>你好，我是戴铭。今天，我要和你分享的是如何为你 App 添加酷炫的动画效果。</p><p>不论是iOS开发，还是Android开发，现在的动画库差不多都需要手动去编写动画代码。这样的话，iOS 和 Android 开发者就需要分别去编写适合自己系统的代码。而且，手动编写动画的代码也非常复杂，不容易维护，很多动画细节的调整还需要和动画设计师不断沟通打磨，尤其是千行以上的动画代码编写、维护、沟通的成本巨大。</p><p>手动编写动画代码，除了会影响到开发者外，动画设计师也难以幸免。一款产品适配的平台越多，动画设计师设计走查的周期就越长，相应的动画成本就越高。同时，动画设计师很兴奋地设计出一套炫酷地动画效果后，在要通过开发者实现出来时，却因为工时评估过长而一再被简化，甚至被直接取消。试想一下，以后他还会动力十足地去设计酷炫的动画效果吗？</p><p>所以，你会发现现在有酷炫的动画效果的 App 非常少，而且多是出自个人开发者之手。那么，这就提高了对个人开发者的要求，不但要求他代码写得好，还要能够设计出好的动画效果。但是，这样的人才也是不可多得。</p><p>那，到底有没有什么办法能够把动画制作和App开发隔离开，专人做专事，而且还能使得多个平台的动画效果保持一致呢？</p><!-- [[[read_end]]] --><p>办法总比困难多。接下来，我们就一起看看如何实现的问题吧。</p><h2>Lottie</h2><p><a href="http://airbnb.io/lottie/#/">Lottie 框架</a>就很好地解决了动画制作与开发隔离，以及多平台统一的问题。</p><p>Lottie 是 Airbnb 开源的一个动画框架。Lottie 这个名字来自于一名德国导演洛特·赖尼格尔（Lotte Reiniger），她最著名的电影叫作“阿赫迈德王子历险记（The Adventures of Prince Achmed）”。这个框架和其他的动画框架不太一样，动画的编写和维护将由动画设计师完成，完全无需开发者操心。</p><p>动画设计师做好动画以后，可以使用<a href="https://www.adobe.com/products/aftereffects.html">After Effects</a>将动画导出成JSON文件，然后由Lottie 加载和渲染这个JSON文件，并转换成对应的动画代码。由于是JSON格式，文件也会很小，可以减少 App 包大小。运行时还可以通过代码控制更改动画，比如更改颜色、位置以及任何关键值。另外，Lottie 还支持页面切换的过场动画（UIViewController Transitions）。</p><p>下面的两张动画，就是使用Lottie 做出来的效果。<br>
+<img src="https://static001.geekbang.org/resource/image/4a/c9/4a6a19fdb4fc53757d27ddb6aa4380c9.gif" alt=""></p><p><img src="https://static001.geekbang.org/resource/image/27/75/270ed9bc73a18fde74611bdbef419975.gif" alt=""></p><p>上面这些动画，就是由动画设计师使用 After Effects 创作，然后使用 <a href="https://github.com/airbnb/lottie-web">Bodymovin</a>进行导出的，开发者完全不用做什么额外的代码工作，就能够使用原生方式将其渲染出来。</p><p>Bodymovin 是 Hernan Torrisi 做的一个 After Effects 的插件，起初导出的JSON文件只是通过 JavaScript 在网页中进行动画的播放，后来才将JSON文件的解析渲染应用到了其他平台上。</p><p>那么，如何使用 Bodymovin 呢？</p><h2>Bodymovin</h2><p>你需要先到<a href="https://www.adobeexchange.com/creativecloud.details.12557.html">Adobe官网</a>下载Bodymovin插件，并在 After Effects 中安装。使用 After Effects 制作完动画后，选择 Windows 菜单，找到 Extensions 的 Bodymovin 项，在菜单中选择 Render 按钮就可以输出JSON文件了。</p><p><a href="https://lottiefiles.com/">LottieFiles网站</a>还是一个动画设计师分享作品的平台，每个动画效果的JSON文件都可下载使用。所以，如果你现在没有动画设计师配合的话，可以到这个网站去查找并下载一个 Bodymovin 生成的JSON文件，然后运用到工程中去试试效果。</p><h2>在 iOS 中使用 Lottie</h2><p>在iOS开发中使用Lottie也很简单，只要集成 Lottie 框架，然后在程序中通过 Lottie 的接口控制 After Effects 生成的动画 JSON 就行了。</p><p>首先，你可以通过 CocoaPods 集成 Lottie 框架到你工程中。Lottie iOS 框架的 GitHub 地址是<a href="https://github.com/airbnb/lottie-ios/">https://github.com/airbnb/lottie-ios/</a>，官方也提供了<a href="https://github.com/airbnb/lottie-ios/tree/master/Example">可供学习的示例</a>。</p><p>然后，快速读取一个由Bodymovin 生成的JSON文件进行播放。具体代码如下所示：</p><pre><code>LOTAnimationView *animation = [LOTAnimationView animationNamed:@&quot;Lottie&quot;];
+[self.view addSubview:animation];
+[animation playWithCompletion:^(BOOL animationFinished) {
+  // 动画完成后需要处理的事情
+}];
+</code></pre><p>利用 Lottie 的动画进度控制能力，还可以完成手势与动效同步的问题。动画进度控制是 LOTAnimationView 的 animationProgress 属性，设置属性的示例代码如下：</p><pre><code>CGPoint translation = [gesture getTranslationInView:self.view];
+CGFloat progress = translation.y / self.view.bounds.size.height;
+animationView.animationProgress = progress;
+</code></pre><p>Lottie 还带有一个 UIViewController animation-controller，可以自定义页面切换的过场动画，示例代码如下：</p><pre><code>#pragma mark -- 定制转场动画
+
+// 代理返回推出控制器的动画
+- (id&lt;UIViewControllerAnimatedTransitioning&gt;)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@&quot;vcTransition1&quot; fromLayerNamed:@&quot;outLayer&quot; toLayerNamed:@&quot;inLayer&quot; applyAnimationTransform:NO];
+  return animationController;
+}
+
+// 代理返回退出控制器的动画
+- (id&lt;UIViewControllerAnimatedTransitioning&gt;)animationControllerForDismissedController:(UIViewController *)dismissed {
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@&quot;vcTransition2&quot; fromLayerNamed:@&quot;outLayer&quot; toLayerNamed:@&quot;inLayer&quot; applyAnimationTransform:NO];
+  return animationController;
+}
+</code></pre><p>Lottie 在运行期间提供接口和协议来更改动画，有动画数据搜索接口 LOTKeyPath，以及设置动画数据的协议 LOTValueDelegate。详细的说明和使用示例代码，你可以参看<a href="http://airbnb.io/lottie/#/ios">官方 iOS 教程</a>。</p><h2>多平台支持</h2><p>Lottie 支持多平台，除了 支持<a href="https://github.com/airbnb/lottie-ios">iOS</a>，还支持 <a href="https://github.com/airbnb/lottie-android">Android</a> 、<a href="https://github.com/react-native-community/lottie-react-native">React Native</a>和<a href="https://github.com/simolus3/fluttie">Flutter</a>。除了官方维护的这些平台外，Lottie还支持<a href="https://github.com/windows-toolkit/Lottie-Windows">Windows</a>、<a href="https://blog.qt.io/blog/2019/03/08/announcing-qtlottie/">Qt</a>、<a href="https://skia.org/user/modules/skottie">Skia</a> 。陈卿还实现了 <a href="https://github.com/chenqingspring/react-lottie">React</a>、<a href="https://github.com/chenqingspring/vue-lottie">Vue</a>和<a href="https://github.com/chenqingspring/ng-lottie">Angular</a>对 Lottie的支持，并已将代码放到了GitHub上。</p><p>有了这么多平台的支持，对于动画设计师来说，可以安心做动画，只要简单地转换就可以完美展现动画效果，再也不用担心到开发者那里动画效果被大打折扣了。而对于开发者来说，再也不用写那些难以维护的大量动效代码了，而且App安装包的体积还变小了。</p><p>那么，<strong>这么神奇的框架，在 iOS 里到底是怎么实现的呢？</strong>接下来，我们就看下Lottie的实现原理吧。</p><p>通过原理的学习，你会掌握通过 JSON 来控制代码逻辑的能力。比如，你可以把运营活动流程的代码逻辑设计为一种规范，再设计一个拖拽工具用来创建运营活动流程，最后生成一份表示运营活动逻辑的 JSON，下发到 App 内来开启新的运营活动。</p><h2>Lottie 实现原理</h2><p>实际上，<a href="https://github.com/airbnb/lottie-ios">Lottie iOS</a>在 iOS 内做的事情就是将 After Effects 编辑的动画内容，通过JSON文件这个中间媒介，一一映射到 iOS 的 LayerModel、Keyframe、ShapeItem、DashElement、Marker、Mask、Transform 这些类的属性中并保存了下来，接下来再通过 CoreAnimation 进行渲染。这就和你手动写动画代码的实现是一样的，只不过这个过程的精准描述，全部由动画设计师通过 JSON文件输入进来了。</p><p>Lottie iOS 使用系统自带的 Codable协议来解析JSON文件，这样就可以享受系统升级带来性能提升的便利，比如 ShapeItem 这个类设计如下：</p><pre><code>// Shape Layer
+class ShapeItem: Codable {
+  
+  /// shape 的名字
+  let name: String
+  
+  /// shape 的类型
+  let type: ShapeType
+
+  // 和 json 中字符映射
+  private enum CodingKeys : String, CodingKey {
+    case name = &quot;nm&quot;
+    case type = &quot;ty&quot;
+  }
+  // 初始化
+  required init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: ShapeItem.CodingKeys.self)
+    self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? &quot;Layer&quot;
+    self.type = try container.decode(ShapeType.self, forKey: .type)
+  }
+
+}
+</code></pre><p>通过上面代码可以看出，ShapeItem 有两个属性，映射到JSON的字符键值是 nm 和 ty，分别代表 shape 的名字和类型。下面，我们再一起看一段 Bodymovin 生成的JSON代码：</p><pre><code>{&quot;ty&quot;:&quot;st&quot;,&quot;fillEnabled&quot;:true,&quot;c&quot;:{&quot;k&quot;:[{&quot;i&quot;:{&quot;x&quot;:[0.833],&quot;y&quot;:[0.833]},&quot;o&quot;:{&quot;x&quot;:[0.167],&quot;y&quot;:[0.167]},&quot;n&quot;:[&quot;0p833_0p833_0p167_0p167&quot;],&quot;t&quot;:22,&quot;s&quot;:[0,0.65,0.6,1],&quot;e&quot;:[0.76,0.76,0.76,1]},{&quot;t&quot;:36}]},&quot;o&quot;:{&quot;k&quot;:100},&quot;w&quot;:{&quot;k&quot;:3},&quot;lc&quot;:2,&quot;lj&quot;:2,&quot;nm&quot;:&quot;Stroke 1&quot;,&quot;mn&quot;:&quot;ADBE Vector Graphic - Stroke&quot;}
+
+</code></pre><p>在这段JSON代码中，nm 键对应的值是 Stroke 1，ty 键对应的值是 st。那我们再来看看，<strong>st 是什么类型。</strong></p><p>我们知道，ShapeType 是个枚举类型，它的定义如下：</p><pre><code>enum ShapeType: String, Codable {
+  case ellipse = &quot;el&quot;
+  case fill = &quot;fl&quot;
+  case gradientFill = &quot;gf&quot;
+  case group = &quot;gr&quot;
+  case gradientStroke = &quot;gs&quot;
+  case merge = &quot;mm&quot;
+  case rectangle = &quot;rc&quot;
+  case repeater = &quot;rp&quot;
+  case round = &quot;rd&quot;
+  case shape = &quot;sh&quot;
+  case star = &quot;sr&quot;
+  case stroke = &quot;st&quot;
+  case trim = &quot;tm&quot;
+  case transform = &quot;tr&quot;
+}
+</code></pre><p>通过上面的枚举定义，可以看到 st 对应的是 stroke 类型。</p><p>Lottie 就是通过这种方式，定义了一系列的类结构，可以将JSON数据全部映射过来。所有映射用的类都放在 Lottie 的 Model 目录下。使用 CoreAnimation 渲染的相关代码都在 NodeRenderSystem 目录下，比如前面举例的 Stoke。</p><p>在渲染前会生成一个节点，实现在 StrokeNode.swift 里，然后对 StokeNode 这个节点渲染的逻辑在 StrokeRenderer.swift 里。核心代码如下：</p><pre><code>// 设置 Context
+func setupForStroke(_ inContext: CGContext) {
+  inContext.setLineWidth(width) // 行宽
+  inContext.setMiterLimit(miterLimit)
+  inContext.setLineCap(lineCap.cgLineCap) // 行间隔
+  inContext.setLineJoin(lineJoin.cgLineJoin)
+	// 设置线条样式
+  if let dashPhase = dashPhase, let lengths = dashLengths {
+    inContext.setLineDash(phase: dashPhase, lengths: lengths)
+  } else {
+    inContext.setLineDash(phase: 0, lengths: [])
+  }
+}
+
+// 渲染
+func render(_ inContext: CGContext) {
+  guard inContext.path != nil &amp;&amp; inContext.path!.isEmpty == false else {
+    return
+  }
+  guard let color = color else { return }
+  hasUpdate = false
+  setupForStroke(inContext)
+  inContext.setAlpha(opacity) // 设置透明度
+  inContext.setStrokeColor(color) // 设置颜色
+  inContext.strokePath()
+}
+</code></pre><p>这段代码看起来是不是就很熟悉了？</p><p>如果是手写动画，这些代码就需要不断重复地写。使用第三方库去写动画的话，也无非就是多封装了一层，而属性的设置、动画时间的设置等，还是需要手动添加很多代码来完成。</p><p>但是，使用 Lottie 后，你就完全不用去管这些代码了，只需要在 After Effects 那设置属性、控制动画时间就好了。</p><h2>小结</h2><p>今天这篇文章，我分享了一个制作动画的利器 Lottie，并和你说了如何在 iOS 中使用，以及它的实现原理。听到这，你一定感到奇怪， iOS 开发中还有很多优秀的动画框架，比如 Pop，但是为什么我只跟你说了 Lottie 呢？</p><p>因为在我看来， Lottie 这样的工作流程或许就是未来的趋势，就像 iOS 现在的发展趋势一样，越来越多的业务逻辑不再需要全部使用 Objective-C 或 Swift 来实现了，而是使用JavaScript 语言或者 DSL 甚至是工具来描述业务，然后将描述业务的代码转换成一种中间代码，比如 JSON，不同平台再对相同的中间代码进行解析处理，以执行中间代码描述的业务逻辑。</p><p>这样做不仅可以减轻 App 包的大小，实现多端逻辑的统一处理，还可以让团队分工更加明确，一部分人专门开发业务代码，另一部分人负责端内稳定性、质量把控、性能提升工作的建设。</p><h2>课后作业</h2><p>相信你看到这，一定已经忍不住想小试身手了，那么就请你到 <a href="https://lottiefiles.com/">LottieFiles</a>网站下载一个JSON文件，做一个 Lottie Demo 感受下吧。</p><p>感谢你的收听，欢迎你在评论区给我留言分享你的观点，也欢迎把它分享给更多的朋友一起阅读。</p><p><img src="https://static001.geekbang.org/resource/image/0d/3f/0da0c6fee64a3103893dd3f8b2b58e3f.jpg" alt=""></p><h2>精选留言：</h2>
+        <ul>
+        
+<li>
+    <div>
+        <div style="color: #888;font-size:15.25px;font-weight:400;line-height:1.2">
+            起誓四境  2019-05-02 22:28:15
+        </div>
+        <div style="color:#353535;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6">
+            也遇到过楼上一样的调整大小、适配的问题，问一下，其他同学有没有好的方案？ 
+        </div>
+        
+    </div>
+</li>
+            
+<br/>
+
+<li>
+    <div>
+        <div style="color: #888;font-size:15.25px;font-weight:400;line-height:1.2">
+            政  2019-05-02 11:06:44
+        </div>
+        <div style="color:#353535;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6">
+            Lottie确实是个好东西，但是之前使用的时候遇到过大小不匹配的问题，不知道是设计师的锅还是我的锅。需要代码这边去适配这个不太准确的大小。 
+        </div>
+        
+    </div>
+</li>
+            
+<br/>
+
+<li>
+    <div>
+        <div style="color: #888;font-size:15.25px;font-weight:400;line-height:1.2">
+            偶滴关  2019-05-02 08:48:07
+        </div>
+        <div style="color:#353535;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6">
+            太好了！才知道居然有这么一个框架😃，动画效果一直是我的弱项。 
+        </div>
+        
+    </div>
+</li>
+            
+<br/>
+
+<li>
+    <div>
+        <div style="color: #888;font-size:15.25px;font-weight:400;line-height:1.2">
+            Moon  2019-05-02 08:42:33
+        </div>
+        <div style="color:#353535;font-weight:400;white-space:normal;word-break:break-all;line-height:1.6">
+            666，受教了。 
+        </div>
+        
+    </div>
+</li>
+            </ul>
+</div>
+</body>
+</html>
